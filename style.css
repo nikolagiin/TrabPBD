@@ -11,6 +11,10 @@ header{
     position: absolute;
     right: 300px;
 }
+#dados{
+    position: absolute;
+    top: 50px;
+}
 nav{
     position: absolute;
     right: 20px;
