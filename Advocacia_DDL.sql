@@ -19,8 +19,6 @@ CREATE TABLE ADVOGADO (
 -- Adiciona a chave primaria da tabela advogado (Nicolas)
 ALTER TABLE ADVOGADO ADD PRIMARY KEY (OAB);
 
--- Nicolas
-
 CREATE TABLE PESSOAS (
 	id			INT(20)				NOT NULL,
 	CPF			VARCHAR(20)			NOT NULL UNIQUE, 
@@ -31,9 +29,6 @@ CREATE TABLE PESSOAS (
     PRIMARY KEY(CPF)
 );
 
-
--- Nicolas
-
 CREATE TABLE AUTOR (
 	id			INT(20)				NOT NULL,
 	CPFAUTOR	VARCHAR(20)			NOT NULL UNIQUE, 
@@ -41,13 +36,9 @@ CREATE TABLE AUTOR (
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    PRIMARY KEY (CPF),
+    PRIMARY KEY (CPFAUTOR),
     FOREIGN KEY  (CPFAUTOR) REFERENCES PESSOAS(CPF)
 );
-
-ALTER TABLE AUTOR ADD PRIMARY KEY (CPFAUTOR);
-
--- Nicolas
 
 CREATE TABLE REU (
 	id			INT(20)				NOT NULL,
@@ -56,7 +47,6 @@ CREATE TABLE REU (
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    PRIMARY KEY (CPF),
     FOREIGN KEY  (CPFREU) REFERENCES PESSOAS(CPF)
 );
 
@@ -90,6 +80,21 @@ CREATE TABLE TEM(
     FOREIGN KEY  (CPF) REFERENCES PESSOAS(CPF)
     );
     
+CREATE TABLE JULGAM(
+	CPF			VARCHAR(20) ,
+    DIAMESANO	DATE		,
+    SENTECA		VARCHAR(50) ,
+    PRIMARY KEY (CPF),
+    FOREIGN KEY (CPF) REFERENCES PESSOAS(CPF)
+);
+
+CREATE TABLE TRABALHA_EM(
+	REGISTRO_OAB	VARCHAR(15) NOT NULL	,
+    NPROCESSO		CHAR(30) 	NOT NULL	,
+    PRIMARY KEY (REGISTRO_OAB, NPROCESSO)	,
+    FOREIGN KEY (REGISTRO_OAB) REFERENCES ADVOGADO(OAB),
+    FOREIGN KEY (NPROCESSO) REFERENCES CASO(NPROCESSO)
+);
     
 
 -- Insere o primeiro registro na tabela empregado (Nicolas)
@@ -100,65 +105,26 @@ INSERT INTO ADVOGADO (OAB, RAMO, NOME, TELEFONE, EMAIL, ENDERECO) VALUES
 INSERT INTO JUIZ VALUES
 	('111.222.333-44', 'Gerivaldo Nunes', '11223-456', '(55) 9 8888-4444', 'gerivaldoronaldo@endereco.com');
 
--- Altera departamento para receber como valore default 
--- ALTER TABLE DEPARTAMENTO ALTER NSSGER SET DEFAULT '888665555';
-
--- Altera departamento para receber nomes unicos em dnome
--- ALTER TABLE DEPARTAMENTO ADD CONSTRAINT DEPARTAMENTO_NOME UNIQUE (DNOME);
-
--- Cria a tabela locais_depto
-CREATE TABLE LOCAIS_DEPTO (
-	DNUMERO			INT			NOT NULL, 		
-	DLOCALIZACAO	VARCHAR(15)	NOT NULL, 
-PRIMARY KEY (DNUMERO, DLOCALIZACAO),
-FOREIGN KEY (DNUMERO) REFERENCES DEPARTAMENTO (DNUMERO) ON DELETE CASCADE
-);
-
--- Altera projeto para receber nomes unicos em pnome
-ALTER TABLE PROJETO ADD CONSTRAINT PROJETO_NOME UNIQUE (PNOME);
-
--- Cria a tabela trabalha_em
-CREATE TABLE TRABALHA_EM (
-	NSSEMP		CHAR(9)			NOT NULL, 
-	PNRO		INT				NOT NULL, 
-	HORAS		DECIMAL(3, 1)	NOT NULL, 
-PRIMARY KEY (NSSEMP, PNRO), 
-FOREIGN KEY (NSSEMP) REFERENCES EMPREGADO (NSS) ON DELETE CASCADE, 
-FOREIGN KEY (PNRO) REFERENCES PROJETO (PNUMERO) ON DELETE CASCADE
-);
-
--- Altera na tabela trabalha_em para horas receber valores nulos
-ALTER TABLE TRABALHA_EM MODIFY HORAS DECIMAL(3,1) NULL;
-
--- Cria a tabela dependente
-CREATE TABLE DEPENDENTE(
-	NSSEMP			CHAR(9)		NOT NULL, 
-	NOMEDEPENDENTE	VARCHAR(15)	NOT NULL, 
-	SEXO			CHAR				, 
-	DATANIV			DATE				, 
-	RELACAO			VARCHAR(8)			, 
-PRIMARY KEY (NSSEMP, NOMEDEPENDENTE), 
-FOREIGN KEY (NSSEMP) REFERENCES EMPREGADO (NSS)
-);
-
 -- Mostra as tabelas criadas
 SHOW TABLES;
 
 -- Mostra a descrição da tabela empregado
-DESCRIBE EMPREGADO;
+DESCRIBE ADVOGADO;
 
--- Mostra a descrição da tabela departamento
-DESCRIBE DEPARTAMENTO;
+-- Mostra a descrição da tabela pessoas
+DESCRIBE PESSOAS;
 
--- Mostra a descrição da tabela locais_depto
-DESCRIBE LOCAIS_DEPTO;
+-- Mostra a descrição da tabela autor
+DESCRIBE AUTOR;
 
--- Mostra a descrição da tabela projeto
-DESCRIBE PROJETO;
+-- Mostra a descrição da tabela réu
+DESCRIBE REU;
+
+-- Mostra a descrição da tabela juiz
+DESCRIBE JUIZ;
 
 -- Mostra a descrição da tabela trabalha_em
 DESCRIBE TRABALHA_EM;
 
 -- Mostra a descrição da tabela dependente
-DESCRIBE DEPENDENTE;
-
+DESCRIBE TEM;
