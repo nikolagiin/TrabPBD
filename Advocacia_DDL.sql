@@ -16,7 +16,6 @@ CREATE TABLE ADVOGADO (
     CNPJ		CHAR(20)					,
 	PRIMARY KEY (OAB)
 );
-
 CREATE TABLE PESSOAS (
 	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPF			VARCHAR(20)			NOT NULL UNIQUE, 
@@ -34,11 +33,10 @@ CREATE TABLE AUTOR (
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    PRIMARY KEY (CPFAUTOR)
+  PRIMARY KEY (CPFAUTOR)
 );
 
 ALTER TABLE AUTOR ADD FOREIGN KEY  (CPFAUTOR) REFERENCES PESSOAS(CPF);
-
 CREATE TABLE REU (
 	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPFREU		VARCHAR(20)			NOT NULL UNIQUE, 
@@ -46,7 +44,8 @@ CREATE TABLE REU (
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    PRIMARY KEY (CPFREU)
+   PRIMARY KEY (CPFREU)
+
 );
 
 ALTER TABLE REU ADD FOREIGN KEY (CPFREU) REFERENCES PESSOAS(CPF);
@@ -107,28 +106,3 @@ INSERT INTO PESSOAS (CPF, NOME, CEP, EMAIL, TELEFONE) VALUES
 INSERT INTO JUIZ (CPFJUIZ, NOME, CEP, TELEFONE, EMAIL) VALUES
 	('111.222.333-44', 'Gerivaldo Nunes', '11223-456', '(55) 9 8888-4444', 'gerivaldoronaldo@endereco.com');
     
-
-
--- Mostra as tabelas criadas
-SHOW TABLES;
-
--- Mostra a descrição da tabela empregado
-DESCRIBE ADVOGADO;
-
--- Mostra a descrição da tabela pessoas
-DESCRIBE PESSOAS;
-
--- Mostra a descrição da tabela autor
-DESCRIBE AUTOR;
-
--- Mostra a descrição da tabela réu
-DESCRIBE REU;
-
--- Mostra a descrição da tabela juiz
-DESCRIBE JUIZ;
-
--- Mostra a descrição da tabela trabalha_em
-DESCRIBE TRABALHA_EM;
-
--- Mostra a descrição da tabela dependente
-DESCRIBE TEM;
