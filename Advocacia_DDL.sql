@@ -1,26 +1,23 @@
 -- Cria a base de dados Companhia
-CREATE DATABASE Advocacia;
+CREATE DATABASE AdvocaciaWORK;
 
 -- Coloca a base de dados advocacia em uso
-USE Advocacia;
+USE AdvocaciaWORK;
 
 -- Cria a tabela advogado (Nicolas)
 CREATE TABLE ADVOGADO (
-	id			INT(20)				NOT NULL,
+	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	OAB			VARCHAR(15)			NOT NULL UNIQUE, 
 	RAMO		CHAR(9)				NOT NULL, 
 	NOME		VARCHAR(60)			NOT NULL, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
 	ENDERECO	CHAR(40)					,
-    CNPJ		CHAR(20)					
+    CNPJ		CHAR(20)					,
+	PRIMARY KEY (OAB)
 );
-
--- Adiciona a chave primaria da tabela advogado (Nicolas)
-ALTER TABLE ADVOGADO ADD PRIMARY KEY (OAB);
-
 CREATE TABLE PESSOAS (
-	id			INT(20)				NOT NULL,
+	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPF			VARCHAR(20)			NOT NULL UNIQUE, 
 	NOME		VARCHAR(60)			NOT NULL, 
 	CEP			CHAR(10)					, 
@@ -30,31 +27,32 @@ CREATE TABLE PESSOAS (
 );
 
 CREATE TABLE AUTOR (
-	id			INT(20)				NOT NULL,
+	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPFAUTOR	VARCHAR(20)			NOT NULL UNIQUE, 
 	NOME		VARCHAR(60)			NOT NULL, 
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    PRIMARY KEY (CPFAUTOR),
-    FOREIGN KEY  (CPFAUTOR) REFERENCES PESSOAS(CPF)
+  PRIMARY KEY (CPFAUTOR)
 );
 
+ALTER TABLE AUTOR ADD FOREIGN KEY  (CPFAUTOR) REFERENCES PESSOAS(CPF);
 CREATE TABLE REU (
-	id			INT(20)				NOT NULL,
+	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPFREU		VARCHAR(20)			NOT NULL UNIQUE, 
 	NOME		VARCHAR(60)			NOT NULL, 
 	CEP			CHAR(10)					, 
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
-    FOREIGN KEY  (CPFREU) REFERENCES PESSOAS(CPF)
+   PRIMARY KEY (CPFREU)
+
 );
 
-ALTER TABLE REU ADD PRIMARY KEY (CPFREU);
+ALTER TABLE REU ADD FOREIGN KEY (CPFREU) REFERENCES PESSOAS(CPF);
 
 -- Nicolas
 CREATE TABLE JUIZ (
-	id			INT(20)				NOT NULL,
+	id			INT(20)				NOT NULL AUTO_INCREMENT,
 	CPFJUIZ		VARCHAR(20)			NOT NULL UNIQUE, 
 	NOME		VARCHAR(60)			NOT NULL, 
 	CEP			CHAR(10)					, 
@@ -98,33 +96,13 @@ CREATE TABLE TRABALHA_EM(
     
 
 -- Insere o primeiro registro na tabela empregado (Nicolas)
-INSERT INTO ADVOGADO (OAB, RAMO, NOME, TELEFONE, EMAIL, ENDERECO) VALUES
+INSERT INTO ADVOGADO (OAB, RAMO, NOME, TELEFONE, EMAIL, ENDERECO, CNPJ) VALUES
 	('RS112233T', 'Homicidio', 'Roberto Boquia', '(53) 9 5566-9988', 'correioEletronicoDoRoberto@correio.com', 'Av. Porquinho, 666', '12.666.777/0001-42');
 
 -- Insere o primeiro registro na tabela departamento (Nicolas)
-INSERT INTO JUIZ VALUES
+INSERT INTO PESSOAS (CPF, NOME, CEP, EMAIL, TELEFONE) VALUES
+	('111.222.333-44', 'Gerivaldo Nunes', '11223-456', 'gerivaldoronaldo@endereco.com', '(55) 9 8888-4444');
+    
+INSERT INTO JUIZ (CPFJUIZ, NOME, CEP, TELEFONE, EMAIL) VALUES
 	('111.222.333-44', 'Gerivaldo Nunes', '11223-456', '(55) 9 8888-4444', 'gerivaldoronaldo@endereco.com');
-
--- Mostra as tabelas criadas
-SHOW TABLES;
-
--- Mostra a descrição da tabela empregado
-DESCRIBE ADVOGADO;
-
--- Mostra a descrição da tabela pessoas
-DESCRIBE PESSOAS;
-
--- Mostra a descrição da tabela autor
-DESCRIBE AUTOR;
-
--- Mostra a descrição da tabela réu
-DESCRIBE REU;
-
--- Mostra a descrição da tabela juiz
-DESCRIBE JUIZ;
-
--- Mostra a descrição da tabela trabalha_em
-DESCRIBE TRABALHA_EM;
-
--- Mostra a descrição da tabela dependente
-DESCRIBE TEM;
+    
