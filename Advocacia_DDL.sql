@@ -1,10 +1,10 @@
--- Cria a base de dados Companhia
+-- Cria Banco de Dados Advocacia
 CREATE DATABASE Advocacia;
 
--- Coloca a base de dados advocacia em uso
+-- Usa o Banco de Dados Advocacia
 USE Advocacia;
 
--- Cria a tabela advogado (Nicolas)
+-- Cria a tabela ADVOGADO
 CREATE TABLE ADVOGADO (
 	OAB			VARCHAR(15)			NOT NULL UNIQUE, 
 	IDRAMO		CHAR(10)					,
@@ -14,16 +14,17 @@ CREATE TABLE ADVOGADO (
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
 	ENDERECO	CHAR(40)					,
-  PRIMARY KEY (OAB)
+	PRIMARY KEY (OAB) -- Torna coluna OAB chave primária
   );
 
-
+-- Cria tabela RAMO
 CREATE TABLE RAMO (
-	  ID		VARCHAR(10)				NOT NULL UNIQUE,
+	ID		VARCHAR(10)				NOT NULL UNIQUE,
     RAMO	CHAR(30)				NOT NULL UNIQUE,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID) -- Torna coluna ID chave primária
     );
-    
+
+-- Cria tabela PESSOAS
 CREATE TABLE PESSOAS (
 	CPF			VARCHAR(20)			NOT NULL UNIQUE, 
 	PNOME		VARCHAR(20)			NOT NULL,
@@ -36,6 +37,7 @@ CREATE TABLE PESSOAS (
     PRIMARY KEY(CPF)
 );
 
+-- Cria tabela AUTOR
 CREATE TABLE AUTOR (
 	CPFAUTOR	VARCHAR(20)			NOT NULL UNIQUE, 
 	PNOME		VARCHAR(20)			NOT NULL,
@@ -48,8 +50,10 @@ CREATE TABLE AUTOR (
     PRIMARY KEY (CPFAUTOR)
 );
 
+-- Altera tabela Autor tornando a coluna CPFAUTOR uma chave estrangeira, referenciando a coluna CPF da tabela PESSOAS
 ALTER TABLE AUTOR ADD FOREIGN KEY  (CPFAUTOR) REFERENCES PESSOAS(CPF);
 
+-- Cria tabela REU
 CREATE TABLE REU (
 	CPFREU		VARCHAR(20)			NOT NULL UNIQUE, 
 	PNOME		VARCHAR(20)			NOT NULL,
@@ -60,12 +64,12 @@ CREATE TABLE REU (
 	EMAIL		VARCHAR(50)					,
     ENDERECO	CHAR(40)					,
     PRIMARY KEY (CPFREU)
-
 );
 
+-- Altera tabela REU tornando a coluna CPFREU uma chave estrangeira, referenciando a coluna CPF da tabela PESSOAS
 ALTER TABLE REU ADD FOREIGN KEY (CPFREU) REFERENCES PESSOAS(CPF);
 
--- Nicolas
+-- Cria tabela JUIZ
 CREATE TABLE JUIZ (
 	CPFJUIZ		VARCHAR(20)			NOT NULL UNIQUE, 
 	PNOME		VARCHAR(20)			NOT NULL,
@@ -75,11 +79,11 @@ CREATE TABLE JUIZ (
 	TELEFONE	VARCHAR(20)					,
 	EMAIL		VARCHAR(50)					,
     ENDERECO	CHAR(40)					,
-    PRIMARY KEY(CPFJUIZ),
-    FOREIGN KEY (CPFJUIZ) REFERENCES PESSOAS(CPF)
+    PRIMARY KEY(CPFJUIZ), 
+    FOREIGN KEY (CPFJUIZ) REFERENCES PESSOAS(CPF) -- Torna coluna CPFJUIZ chave estrangeira referenciando CPF de PESSOAS
 );
 
--- Cria a tabela caso (Nicolas)
+-- Cria a tabela CASO
 CREATE TABLE CASO (
 	NPROCESSO	CHAR(30)		NOT NULL,  -- possui caracteres especiais
     IDJUIZ		VARCHAR(20)		NOT NULL,
@@ -91,12 +95,15 @@ CREATE TABLE CASO (
 	FOREIGN KEY (IDJUIZ) REFERENCES JUIZ(CPFJUIZ)
 );
 
+-- Cria tabela TEM
 CREATE TABLE TEM(
 	CPF		VARCHAR(20),
     PRIMARY KEY (CPF),
     FOREIGN KEY  (CPF) REFERENCES PESSOAS(CPF)
     );
     
+    
+-- Cria tabela JULGAM
 CREATE TABLE JULGAM(
 	CPF				VARCHAR(20) ,
     DIAMESANO		DATE		,
@@ -105,6 +112,7 @@ CREATE TABLE JULGAM(
     FOREIGN KEY (CPF) REFERENCES PESSOAS(CPF)
 );
 
+-- Cria tabela TRABALHA_EM
 CREATE TABLE TRABALHA_EM(
 	REGISTRO_OAB	VARCHAR(15) NOT NULL	,
     NPROCESSO		CHAR(30) 	NOT NULL	,
