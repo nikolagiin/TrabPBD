@@ -4,7 +4,6 @@ Deve ter no mínimo 6 consultas
 
 # Trabalho de Projeto de Banco de Dados
 
-Advocacia(CNPJ, Nome, Endereço, Telefone)
 
 Advogado(Registro OAB, Ramo, Nome, Telefone, E-mail, Endereço, CNPJ)
 	CNPJ referencia advocacia
