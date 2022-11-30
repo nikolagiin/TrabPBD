@@ -1,0 +1,30 @@
+#marca{
+        transform: scaleY(1.5) skewY(-8deg) rotateZ(-3deg) translateZ(0);
+        font-family: Impact, sans-serif;
+        font-size: 36px;
+        color: transparent;
+        background: linear-gradient(to bottom left, #fee601, #fee601 15%, #fe4201);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        z-index: -1;
+        text-shadow: 1px 0 0 #e2e60d, 0 1px 0 #619941, 2px 1px 0.35px #519c1e, 1px 2px 0.35px #3dad26, 3px 2px 0.35px #291fb9, 2px 3px 0.35px #0c1dbd, 4px 3px 0.35px #340fbb, 3px 4px 0.35px #1bd43a, 5px 4px 0.35px #1409b4, 4px 5px 0.35px #2216c5, 6px 5px 0.35px #c6c91d, 5px 6px 0.35px #191cc9, 7px 6px 0.35px #2bc217, 6px 7px 0.35px #1823c7;
+        margin-left: 200px;
+}
+nav{
+    position: absolute;
+    top: 300px;
+    left: 350px;
+}
+nav li{
+    font-family: Impact, sans-serif;
+    display: block;
+    padding: 5px 5px;
+    margin: 20px 0;
+    font-size: 18px;
+    border: solid 2px grey;
+    border-radius: 5px;
+}
+a:visited{
+    color: blue;
+}
