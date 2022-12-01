@@ -26,16 +26,16 @@
 
     <form action="pessoas.php" method="post">
         <div id="dados">
-            <label for="cpf" class="elemento">CPF</label>
+            <label for="cpf" class="elemento">CPF *</label>
             <input type="text" id="cpf" name="cpf" placeholder="000.111.222-33" required>
             <br>
-            <label for="pnome" class="elemento">Primeiro nome</label> 
+            <label for="pnome" class="elemento">Primeiro nome *</label> 
             <input type="text" id="pnome" name="pnome" placeholder="Fulano" required>
             <br>
             <label for="mnome" class="elemento">Sigla do nome do meio</label>
             <input type="text" id="mnome" name="mnome" placeholder="D">
             <br>
-            <label for="snome" class="elemento">Sobrenome</label>
+            <label for="snome" class="elemento">Sobrenome *</label>
             <input type="text" id="snome" name="snome" placeholder="Tal" required>
             <br>
             <label for="cep" class="elemento">CEP</label>
@@ -61,6 +61,7 @@
                 <label for="juiz" class="tipo">Juiz</label>
             </div>
             <br>
+            <p>* Obrigório o Preenchimento</p>
             <button type="submit" name="submit-pess">Enviar Formulário</button>
         </div>
     </form>
