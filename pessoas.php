@@ -25,10 +25,10 @@ if(isset($_POST['submit-pess'])){
         $run = mysqli_query($conn, $query) or die("Connect failed: %s\n". $conn -> error);
 
         if($run){
-            echo "Formulário enviado CARALHO";
+            echo "Formulário enviado";
         }
         else{
-            echo "NÃO FOI PORRA VAI SE FUDEEEEE";
+            echo "Erro";
         }
     
 
