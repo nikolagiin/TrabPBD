@@ -1,7 +1,3 @@
-Entrega dia 23/11
-
-Deve ter no mínimo 6 consultas
-
 # Trabalho de Projeto de Banco de Dados
 
 
